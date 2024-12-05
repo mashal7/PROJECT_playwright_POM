@@ -1,13 +1,13 @@
 from playwright.sync_api import Page
-
+from locators.locators import LoginLocators
 
 class LoginPage:
     def __init__(self, page: Page):
-        self.page = page
-        self.username_input = page.locator('#username')
-        self.password_input = page.locator('#password')
-        self.login_button = page.locator('#login')
-        self.error_message = page.locator('#errorAlert')
+        super().__init__(page)
+
+    username_input = page.get_by_placeholder(LoginLocators.MAIL_INPUT)
+    password_input = page.get_by_placeholder(LoginLocators.PASSWORD_INPUT)
+
 
     def navigate(self):
         """Открывает страницу логина."""

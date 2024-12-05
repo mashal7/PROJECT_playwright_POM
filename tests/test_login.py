@@ -1,18 +1,11 @@
 import pytest
 
-
-def test_login_failure(login_page):
-    login_page.navigate()
-    login_page.login('user', 'password')
-
-    assert login_page.get_error_message() == 'Invalid credentials. Please try again.'
+from pages.login_page import LoginPage
 
 
-@pytest.mark.parametrize('username, password', [
-    ('user', 'user'),
-    ('admin', 'admin')
-])
-def test_login_success(login_page, dashboard_page, username, password):
-    login_page.navigate()
-    login_page.login(username,password)
-    dashboard_page.assert_welcome_message(f"Welcome {username}")
+def test_buy_product(page):
+    """Тест по покупке товара включает в себя:
+        авторизацию, выбор товара, заполнение данных получателя, подтверждение покупки."""
+
+    mail, password = 'petrova44as@yandex.ru', 'qwerty123'
+    authorization = LoginPage(page)
