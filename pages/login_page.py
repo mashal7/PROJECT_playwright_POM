@@ -23,8 +23,8 @@ class LoginPage(Base):
 # ----------------------------Methods----------------------------
     # авторизация в системе
     def log_in(self, mail, password):
-        print('Авторизация')
-        self.get_current_url()
+        print('Авторизация в системе')
+        print(f'Текущий url: {self._page.url}')
 
         # ввод данных и вход
         self.input_mail(mail)
@@ -34,8 +34,7 @@ class LoginPage(Base):
     # проверка на успешную авторизацию
     def is_logged_in(self):
         print('Проверка успешной авторизации')
-        expect(self._page).to_have_url('https://fkniga.ru/cabinet/')
-        print(f'url корректный: {self.get_current_url()}')
+        self.assert_url('https://fkniga.ru/cabinet/')
         self._page.locator(LoginLocators.CHECK_AUTH_WORD)
         print('Авторизация успешно пройдена')
 

@@ -1,9 +1,7 @@
-import pytest
-import time
 from pages.login_page import LoginPage
 
 
-def test_buy_product(page):
+def test_login_with_correct_data(page):
     """Тест по покупке товара включает в себя:
         авторизацию, выбор товара, заполнение данных получателя, подтверждение покупки."""
 
@@ -12,4 +10,5 @@ def test_buy_product(page):
     authorization.go_to_login_page()
     authorization.log_in(mail, password)
     authorization.is_logged_in()
-    time.sleep()
+    page.pause()
+
