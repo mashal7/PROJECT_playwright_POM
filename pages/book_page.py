@@ -38,10 +38,8 @@ class BooksPage(Base):
 
     # универсальный метод: выбор одного из 4 разделов, передача в функцию названия раздела
     def select_section_of_book(self, section):
-        self.go_to_book_section()
         self.assert_url('https://fkniga.ru/catalog/knigi/')
         sections_of_books = self.get_list_of_sections_of_book()
-        self._page.pause()
         # проверка на существование определенного типа
         try:
             sections_of_books[section].click()
