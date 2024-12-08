@@ -20,17 +20,17 @@ class FictionLocators:
     locators_types_fiction = [f'//a[@data-id="{i}"]' for i in range(2885, 2898)]
     '.listProperties:first-child > li'                                  # жанры художественной литературы
     FIELD_AUTHOR = '[name="filter[576]"] + input[placeholder="Поиск..."]'   # поле автора в фильтре
-    AUTHOR_BOCCACCIO = '[data-ga-label="Боккаччо Д."]'                      #
-    BOOK_BINDING = '[data-ga-label="Твердая обложка"]'
-    BUTTON_APPLY_FILTER = '.btn.btn--primary.btn--fullWidth'
-    BUTTON_ADD_TO_CART = '.btn--border50.js-add-to-cart[data-id="919581"]'
-    CHECK_AUTHOR = '.card__subtitle.hiddenMobile'
-    CHECK_PRICE = '.price.price--ruble'
+    AUTHOR_BOCCACCIO = '[data-ga-label="Боккаччо Д."]'                      # выбор автора Бокаччо
+    BOOK_BINDING = '[data-ga-label="Твердая обложка"]'                      # выбор твердой обложки
+    BUTTON_APPLY_FILTER = '.btn.btn--primary.btn--fullWidth'                # кнопка "принять фильтр"
+    BUTTON_ADD_TO_CART = '.btn--border50.js-add-to-cart[data-id="919581"]'  # кнопка "добавить в корзину"
+    CHECK_AUTHOR = '.card__subtitle.hiddenMobile'                           # название автора в каталоге
+    CHECK_PRICE = '.price.price--ruble'                                     # цена книги в каталоге
 
 class CartLocators:
-    CARD_PRICE = 'span[style="font-size: 16px;"]'
-    CARD_AUTHOR = '//p["data-v-6c0c2814"][1]'
-    PLACE_ORDER_BUTTON = '.cartBox__buttons [href="/cart/order/"]'
+    CARD_PRICE = 'span[style="font-size: 16px;"]'                           # цена книги в корзине
+    CARD_AUTHOR = '//p["data-v-6c0c2814"][1]'                               # название автора в корзине
+    PLACE_ORDER_BUTTON = '.cartBox__buttons [href="/cart/order/"]'          # кнопка "оформить заказ"
 
 
 

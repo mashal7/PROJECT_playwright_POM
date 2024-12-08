@@ -35,7 +35,6 @@ class BooksPage(Base):
         self.click_fiction_section()
         self.assert_url('https://fkniga.ru/catalog/hudozhestvennaja-literatura/')
 
-
     # универсальный метод: выбор одного из 4 разделов, передача в функцию названия раздела
     def select_section_of_book(self, section):
         self.assert_url('https://fkniga.ru/catalog/knigi/')

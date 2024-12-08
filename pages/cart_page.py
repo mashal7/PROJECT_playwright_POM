@@ -10,6 +10,7 @@ class CartPage(Base):
 
 
     #----------------------------Actions----------------------------------
+    # нажатие кнопки 'оформление заказа'
     def click_button_place_order(self):
         self._page.locator(CartLocators.PLACE_ORDER_BUTTON).click()
         print('Нажинаем на "Перейти к оформлению"')

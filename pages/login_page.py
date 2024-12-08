@@ -7,14 +7,17 @@ class LoginPage(Base):
         super().__init__(page)
 
     # ----------------------------Actions----------------------------
+    # ввод логина
     def input_mail(self, mail):
         self._page.locator(LoginLocators.MAIL_INPUT).fill(mail)
         print('Ввод mail')
 
+    # ввод пароля
     def input_password(self, password):
         self._page.locator(LoginLocators.PASSWORD_INPUT).fill(password)
         print('Ввод пароля')
 
+    # нажать кнопку входа
     def click_enter_button(self):
         self._page.locator(LoginLocators.ENTER_BUTTON).click()
         print('Вход в личный кабинет')
@@ -39,10 +42,12 @@ class LoginPage(Base):
         print('Авторизация успешно пройдена')
 
 
-        # проверка на неверный ввод данных пользователя
+    # проверка на неверный ввод данных пользователя
     def not_logged_in(self):
         print('Проверка авторизации c вводом неверных данных пользователя')
-        expect(LoginLocators.CHECK_WRONG_DATA, normalize_whitespace=True).to_contain_text('Неверный телефон/почта или пароль.')
-        print('Неверный телефон/почта или пароль')
+        locator = self._page.locator(LoginLocators.CHECK_WRONG_DATA)
+        expect(locator).to_contain_text('Неверный телефон/почта или пароль.')
+        print('Авторизация не выполнена! Данные неверны')
+
 
 

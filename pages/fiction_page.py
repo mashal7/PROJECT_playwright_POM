@@ -20,33 +20,37 @@ class FictionPage(Base):
             d[section.inner_text().rsplit(' ', 1)[0]] = section
         return d
 
+    # ввод автора
     def input_author(self, author):
         self._page.locator(FictionLocators.FIELD_AUTHOR).fill(author)
         print(f'Пишем в фильтре автора {author}')
 
+    # выбор определенного автора
     def click_specific_author(self):
         self._page.locator(FictionLocators.AUTHOR_BOCCACCIO).click()
         print('Выбираем фильтр с нужным автором')
 
+    # выбор обложки
     def click_book_binding(self):
         self._page.locator(FictionLocators.BOOK_BINDING).click()
         print('Выбираем фильтр, где переплетом книги является "Твердая обложка"')
 
+    # нажатие кнопки 'принять фильтр'
     def click_button_apply_filter(self):
         self._page.locator(FictionLocators.BUTTON_APPLY_FILTER).click()
         print('Подтверждаем фильтр')
 
+    # нажатие кнопки 'добавить в корзину'
     def click_button_add_to_cart(self):
         self._page.locator(FictionLocators.BUTTON_ADD_TO_CART).click()
         print('Кладем книгу в корзину')
 
 
     # -----------------------------Methods---------------------------
-    # выбор типа литературы
+    # выбор секции художественной литературы
     def select_section_fiction(self, section):
         self.get_current_url()
         sections_fiction = self.list_of_sections_of_fiction
-        print(sections_fiction)
         try:
             sections_fiction[section].click()
             print(f'Переход в каталог "{section}"')
@@ -66,7 +70,6 @@ class FictionPage(Base):
         self.assert_url('https://fkniga.ru/catalog/klassicheskaja-proza/?filter%5B576%5D=43228&filter%5B578%5D=40368')
         print('Фильтр применен успешно')
 
-
     # добавление книги в корзину
     def add_book_to_cart(self):
         self.click_button_add_to_cart()
@@ -79,7 +82,6 @@ class FictionPage(Base):
         author_text = author.inner_text().split(' ', 1)[1]
         price = self._page.locator(FictionLocators.CHECK_PRICE).first
         price_text = price.inner_text()
-        print(author_text, price_text)
         return author_text, price_text
 
 
