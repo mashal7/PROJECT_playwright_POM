@@ -1,9 +1,12 @@
+import logging
 import allure
 
 from pages.book_page import BooksPage
 from pages.cart_page import CartPage
 from pages.fiction_page import FictionPage
 from pages.login_page import LoginPage
+
+logger = logging.getLogger(__name__)
 
 @allure.feature('Авторизация')
 @allure.title("Тест по покупке товара")
@@ -12,6 +15,7 @@ def test_buy_product(page):
     """Тест по покупке товара (книга Бокаччо "Декамерон", твердая обложка) включает в себя:
         авторизацию, выбор товара по фильтру, заполнение данных получателя, подтверждение покупки."""
 
+    logger.info('Начало теста: test_buy_product')
     mail, password = 'petrova44as@yandex.ru', 'qwerty123'
     authorization = LoginPage(page)
     with allure.step('Открыть страницу авторизации'):
@@ -44,3 +48,4 @@ def test_buy_product(page):
     with allure.step('Перейти к оформлению товара'):
         cart.go_to_place_order()
 
+    logger.info('Тест test_buy_product завершился успешно')

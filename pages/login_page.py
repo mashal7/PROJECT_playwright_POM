@@ -1,6 +1,10 @@
-from base.base_class import Base
+import logging
+
+from base.base_class import Base, logger
 from pages.locators import LoginLocators
 from playwright.sync_api import expect
+
+logger = logging.getLogger(__name__)
 
 class LoginPage(Base):
     def __init__(self, page):
@@ -36,18 +40,27 @@ class LoginPage(Base):
 
     # проверка на успешную авторизацию
     def is_logged_in(self):
-        print('Проверка успешной авторизации')
+        logger.info('Проверка успешной авторизации')
         self.assert_url('https://fkniga.ru/cabinet/')
-        self._page.locator(LoginLocators.CHECK_AUTH_WORD)
-        print('Авторизация успешно пройдена')
+        try:
+            logger.info('Проверка на присутствие заголовка "Личный кабинет"')
+            self._page.locator(LoginLocators.CHECK_AUTH_WORD)
+        except AssertionError as err:
+            logger.error(f'Вход в личный кабинет с верными данными не выполнен. Ошибка проверки: {err}')
+            raise
+        logger.info('Авторизация успешно пройдена')
 
 
     # проверка на неверный ввод данных пользователя
     def not_logged_in(self):
-        print('Проверка авторизации c вводом неверных данных пользователя')
-        locator = self._page.locator(LoginLocators.CHECK_WRONG_DATA)
-        expect(locator).to_contain_text('Неверный телефон/почта или пароль.')
-        print('Авторизация не выполнена! Данные неверны')
+        logger.info('Проверка авторизации c вводом неверных данных пользователя')
+        try:
+            locator = self._page.locator(LoginLocators.CHECK_WRONG_DATA)
+            expect(locator).to_contain_text('Неверный телефон/почта или пароль.')
+        except AssertionError as err:
+            logger.error(f'Вход в личный кабинет с неверными данными выполнен. Ошибка проверки: {err}')
+            raise
+        logger.info('Авторизация не выполнена! Данные неверны. Проверка пройдена успешно')
 
 
 
